@@ -1,4 +1,4 @@
-
+This repository implements multi GPU training support for largesteps.
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
