@@ -31,7 +31,12 @@ class CholeskySolver():
     system by back-substitution.
     """
     def __init__(self, M):
-        self.solver = CholeskySolverF(M.shape[0], M.indices()[0], M.indices()[1], M.values(), MatrixType.COO)
+        device = M.indices()[0].device
+        if device.type == 'cuda':
+            deviceID = device.index
+        else:
+            deviceID = 0
+        self.solver = CholeskySolverF(M.shape[0], M.indices()[0], M.indices()[1], M.values(), MatrixType.COO, deviceID)
 
     def solve(self, b, backward=False):
         x = torch.zeros_like(b)
